@@ -1,10 +1,10 @@
 import http.client
 from datetime import datetime
 from flask_restplus import Namespace, Resource, fields
-from nanotwitter.twitter_backend import config
-from nanotwitter.twitter_backend.models import TweetModel
-from nanotwitter.twitter_backend.token_validation import validate_token_header
-from nanotwitter.twitter_backend.db import db
+from nanotwitter.backend import config
+from nanotwitter.backend.models import TweetModel
+from nanotwitter.backend.token_validation import validate_token_header
+from nanotwitter.backend.db import db
 from flask import abort
 
 api_namespace = Namespace('api', description='API operations')
@@ -44,9 +44,9 @@ class MeTweetListCreate(Resource):
     @api_namespace.expect(authentication_parser)
     @api_namespace.marshal_with(tweet_model, as_list=True)
     def get(self):
-        '''
-        Retrieves all tweets
-        '''
+        """
+        Returns all tweets
+        """
         args = authentication_parser.parse_args()
         username = authentication_header_parser(args['Authorization'])
 
@@ -61,9 +61,9 @@ class MeTweetListCreate(Resource):
     @api_namespace.expect(tweet_parser)
     @api_namespace.marshal_with(tweet_model, code=http.client.CREATED)
     def post(self):
-        '''
+        """
         Create a new tweet
-        '''
+        """
         args = tweet_parser.parse_args()
         username = authentication_header_parser(args['Authorization'])
 

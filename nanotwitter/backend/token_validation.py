@@ -15,9 +15,9 @@ def decode_token(token, public_key):
 
 
 def generate_token_header(username, private_key):
-    '''
+    """
     Generate a token header base on the username. Sign using the private key.
-    '''
+    """
     payload = {
         'username': username,
         'iat': datetime.utcnow(),
@@ -29,12 +29,12 @@ def generate_token_header(username, private_key):
 
 
 def validate_token_header(header, public_key):
-    '''
+    """
     Validate that a token header is correct
 
     If correct, it return the username, if not, it
     returns None
-    '''
+    """
     if not header:
         logger.info('No header')
         return None
@@ -49,7 +49,7 @@ def validate_token_header(header, public_key):
         decoded_token = decode_token(token.encode('utf8'), public_key)
     except jwt.exceptions.DecodeError:
         logger.warning(f'Error decoding header "{header}". '
-                       'This may be key missmatch or wrong key')
+                       'This may be key mismatch or wrong key')
         return None
     except jwt.exceptions.ExpiredSignatureError:
         logger.error(f'Authentication header has expired')

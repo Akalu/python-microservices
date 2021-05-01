@@ -1,5 +1,5 @@
 from sqlalchemy import func
-from nanotwitter.twitter_backend.db import db
+from nanotwitter.backend.db import db
 
 
 class TweetModel(db.Model):

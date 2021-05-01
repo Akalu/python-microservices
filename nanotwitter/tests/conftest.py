@@ -1,8 +1,8 @@
 import pytest
 import http.client
-from nanotwitter.twitter_backend.app import create_app
+from nanotwitter.backend.app import create_app
 from .constants import PRIVATE_KEY
-from nanotwitter.twitter_backend import token_validation
+from nanotwitter.backend import token_validation
 from faker import Faker
 fake = Faker()
 
@@ -12,6 +12,7 @@ def app():
     application = create_app()
 
     application.app_context().push()
+
     # Initialise the DB
     application.db.create_all()
 

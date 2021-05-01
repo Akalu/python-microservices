@@ -3,14 +3,14 @@ from flask_restplus import Api
 
 
 def create_app():
-    from nanotwitter.twitter_backend.api_namespace import api_namespace
-    from nanotwitter.twitter_backend.admin_namespace import admin_namespace
+    from nanotwitter.backend.api_namespace import api_namespace
+    from nanotwitter.backend.admin_namespace import admin_namespace
 
     application = Flask(__name__)
-    api = Api(application, version='0.1', title='Simple Nanotwitter Backend API',
+    api = Api(application, version='0.0.1', title='Simple Nanotwitter Backend API',
               description='A Simple CRUD API')
 
-    from nanotwitter.twitter_backend.db import db, db_config
+    from nanotwitter.backend.db import db, db_config
     application.config['RESTPLUS_MASK_SWAGGER'] = False
     application.config.update(db_config)
     db.init_app(application)

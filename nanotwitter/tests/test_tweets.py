@@ -1,14 +1,13 @@
-'''
+"""
 Test the tweets operations
 
-
 Use the tweet_fixture to have data to retrieve, it generates three tweets
-'''
+"""
 from unittest.mock import ANY
 import http.client
 from freezegun import freeze_time
 from .constants import PRIVATE_KEY
-from nanotwitter.twitter_backend import token_validation
+from nanotwitter.backend import token_validation
 from faker import Faker
 fake = Faker()
 
@@ -113,7 +112,7 @@ def test_list_tweets_search(client, tweet_fixture):
     username = fake.name()
     new_tweet = {
         'username': username,
-        'text': 'A tale about a Platypus'
+        'text': 'Do you dream about the City at the End of Time?'
     }
     header = token_validation.generate_token_header(username,
                                                     PRIVATE_KEY)
@@ -124,13 +123,13 @@ def test_list_tweets_search(client, tweet_fixture):
                            headers=headers)
     assert http.client.CREATED == response.status_code
 
-    response = client.get('/api/tweets/?search=platypus')
+    response = client.get('/api/tweets/?search=city')
     result = response.json
 
     assert http.client.OK == response.status_code
     assert len(result) > 0
 
-    # Check that the returned values contain "platypus"
+    # Check that the returned values contain "city"
     for tweet in result:
         expected = {
             'text': ANY,
@@ -139,7 +138,7 @@ def test_list_tweets_search(client, tweet_fixture):
             'timestamp': ANY,
         }
         assert expected == tweet
-        assert 'platypus' in tweet['text'].lower()
+        assert 'city' in tweet['text'].lower()
 
 
 def test_get_tweet(client, tweet_fixture):

@@ -1,7 +1,7 @@
 import http.client
 from flask_restplus import Namespace, Resource
-from nanotwitter.twitter_backend.models import TweetModel
-from nanotwitter.twitter_backend.db import db
+from nanotwitter.backend.models import TweetModel
+from nanotwitter.backend.db import db
 
 admin_namespace = Namespace('admin', description='Admin operations')
 
@@ -12,9 +12,9 @@ class TweetsDelete(Resource):
     @admin_namespace.doc('delete_tweet',
                          responses={http.client.NO_CONTENT: 'No content'})
     def delete(self, tweet_id):
-        '''
+        """
         Delete a tweet
-        '''
+        """
         tweet = TweetModel.query.get(tweet_id)
         if not tweet:
             # The tweet is not present

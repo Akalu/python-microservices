@@ -1,6 +1,6 @@
 import delorean
 from freezegun import freeze_time
-from nanotwitter.twitter_backend import token_validation
+from nanotwitter.backend import token_validation
 from .constants import PRIVATE_KEY, PUBLIC_KEY
 
 
