@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+    # Development related
+    test-sqlite:
+        environment:
+            - PYTHONDONTWRITEBYTECODE=1
+        build:
+            dockerfile: ./docker_pg/app/Dockerfile
+            context: .
+        entrypoint: pytest
+        volumes:
+            - ./nanotwitter_pg:/opt/code/nanotwitter_pg
+
+    test-postgresql:
+        env_file: environment_pg.env
+        environment:
+            - PYTHONDONTWRITEBYTECODE=1
+        build:
+            dockerfile: ./docker_pg/app/Dockerfile
+            context: .
+        entrypoint: pytest
+        depends_on:
+            - db
+        volumes:
+            - ./nanotwitter_pg:/opt/code/nanotwitter_pg
+
+    db:
+        build:
+            context: .
+            dockerfile: ./docker_pg/db/Dockerfile
+            args:
+                # These values should be in sync with environment
+                # for development. If you change them, you'll 
+                # need to rebuild the container
+                - POSTGRES_DB=tweets
+                - POSTGRES_USER=postgres
+                - POSTGRES_PASSWORD=postgres
+                - POSTGRES_PORT=5432
+        ports:
+            - "5432:5432"
+
+    # Service itself
+    server:
+        env_file: environment_pg.env
+        image: twitter_server
+        build:
+            context: .
+            dockerfile: ./docker_pg/app/Dockerfile
+        ports:
+            - "5000:5000"
+        depends_on:
+            - db

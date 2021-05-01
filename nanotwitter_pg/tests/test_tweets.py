@@ -7,7 +7,7 @@ from unittest.mock import ANY
 import http.client
 from freezegun import freeze_time
 from .constants import PRIVATE_KEY
-from nanotwitter.backend import token_validation
+from nanotwitter_pg.backend import token_validation
 from faker import Faker
 fake = Faker()
 
@@ -133,12 +133,11 @@ def test_list_tweets_search(client, tweet_fixture):
     for tweet in result:
         expected = {
             'text': ANY,
-            'username': ANY, # can be other users who put messages
+            'username': username,
             'id': ANY,
             'timestamp': ANY,
         }
         assert expected == tweet
-        print(tweet)
         assert 'city' in tweet['text'].lower()
 
 

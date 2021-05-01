@@ -7,8 +7,9 @@ freezegun==1.1.0
 delorean==1.0.0
 faker==1.0.7
 pyjwt==1.7.1
-# cryptography==2.6.1 install manually through pip
+cryptography==2.6.1
 parse==1.12.0
+psycopg2==2.8.2
 Werkzeug==0.16.1
 
 pytest~=6.2.3
