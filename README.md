@@ -10,30 +10,27 @@ Overview
 =========
 The format of a Tweet POJO is as follows:
 
+```
 {
     id integer
     username string
     text string
     timestamp string($date-time)
 }
+```
 
 API has the following contract:
 
 
 public api:
 
-Method  Endpoint                Secure      Description
-
-
-GET     /api/me/tweets/             Yes     List of tweets of the user
-
-POST    /api/me/tweets/             Yes     The newly created tweet
-
-GET     /api/tweets/                No      List of all tweets
-
-GET     /api/tweets/{id}/           No      The tweet with ID=id
-
-GET     /api/tweets/?search=token   No      Searches all the tweets that contain token
+| Method | Endpoint                   |Secure|      Description                               |
+|--------|----------------------------|------|------------------------------------------------|
+|GET     |  /api/me/tweets/           |  Yes |    List of tweets of the user                  |
+|POST    |  /api/me/tweets/           |  Yes |    The newly created tweet                     |
+|GET     |  /api/tweets/              |  No  |    List of all tweets                          |
+|GET     |  /api/tweets/{id}/         |  No  |    The tweet with ID=id                        |  
+|GET     |  /api/tweets/?search=token |  No  |    Searches all the tweets that contain token  |
 
 
 private api:
