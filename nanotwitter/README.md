@@ -1,8 +1,10 @@
 RESTful Python microservice
 =============================
 
-This code is our example of RESTful service web app. It is a Flask application (https://www.djangoproject.com/) 
-that creates a RESTful backend to store users posts.
+This code is an example of RESTful service web app. 
+
+It is a Flask application (https://www.djangoproject.com/) that creates a RESTful backend to store user's posts. In other 
+words it's a nano-twitter application
 
 Overview
 =========
